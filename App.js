@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, SafeAreaView, Button } from 'react-native';
 import Section2 from './components/Section2';
+import styles from './styles'
 
 const Section = (propss) => {
   return (
@@ -15,12 +16,18 @@ export default function App() {
 
   const [name, setName] = useState('Ruth');
   console.log(name);
+  let [age, setAge] = useState('20');
 
 
   const accessMyContacts = () => {
     console.log("accessing my contacts");
     setName('Chisom');
     console.log(name);
+  }
+
+  const happyBirthday = () => {
+    setAge(age++);
+    console.log(age);
   }
 
   return (
@@ -49,64 +56,25 @@ export default function App() {
         {/* button */}
         <View style={styles.btnArea}>
           <TouchableOpacity onPress={accessMyContacts} style={styles.btn}>
-            <Text style={styles.btnText}>Access</Text>
+            <Text style={styles.btnText}>Access My Contact</Text>
           </TouchableOpacity>
 
         </View>
 
-        <Button title='Access My Contact' onPress={accessMyContacts} />
+        <Button title='Happy Birthday' onPress={happyBirthday} />
+
+        <Text>{age}</Text>
 
         <Section title="Section 1"/>
         
         <Section2 title="Section 2"/>
+        
       </View>
       
-     </SafeAreaView>
+    </SafeAreaView>
 
     
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    // flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    // justifyContent: 'center',
-  },
-  head: {
-    margin: 10,
-  },
-  headerText: {
-    fontSize: 20,
-    fontWeight: 500,
-  },
-  paragraph: {
-    margin: 15,
-  },
-  pText: {
-    fontSize: 15,
-    textAlign: "justify",
-  },
-  btnArea: {
-    margin: 10,
-    justifyContent: "center",
-  },
-  btn: {
-    borderRadius: 8,
-    margin: 10,
-    backgroundColor: "green",
-  },
-  btnText: {
-    color: "white",
-    padding: 10,
-  },
-  myImgContainer: {
-    margin: 10,
-    alignItems: "center",
-  },
-  myImg: {
-    width: 200,
-    height: 200,
-  }
-});
+
