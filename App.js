@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, SafeAreaView, Button } from 'react-native';
 import Section2 from './components/Section2';
 import styles from './styles'
+import FormInput from './components/FormInput';
 
 const Section = (propss) => {
   return (
@@ -68,6 +69,8 @@ export default function App() {
         <Section title="Section 1"/>
         
         <Section2 title="Section 2"/>
+
+        <FormInput />
         
       </View>
       
