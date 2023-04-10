@@ -15,7 +15,7 @@ const Section = (propss) => {
 export default function App() {
 
   const [name, setName] = useState('Ruth');
-  console.log(name);
+  // console.log(name);
   let [age, setAge] = useState('20');
 
 
@@ -26,7 +26,7 @@ export default function App() {
   }
 
   const happyBirthday = () => {
-    setAge(age++);
+    setAge(++age);
     console.log(age);
   }
 
@@ -63,7 +63,7 @@ export default function App() {
 
         <Button title='Happy Birthday' onPress={happyBirthday} />
 
-        <Text>{age}</Text>
+        <Text>{age} Years Old</Text>
 
         <Section title="Section 1"/>
         
