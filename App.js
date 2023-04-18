@@ -6,51 +6,14 @@ import styles from './styles'
 import FormInput from './components/FormInput';
 import {names} from './externalData';
 import Users from './components/Users';
+import Card from './components/Card';
+import UserDisplay from './components/UserDisplay';
 
 // child component
 const Section = (propss) => {
   return (
     <View style={{margin : 10}}>
       <Text style={{fontSize: 20, fontWeight: 500}}>{propss.title}</Text>
-    </View>
-  )
-}
-
-// child component
-const Card = ({title, showButton, buttonTitle}) => {
-  return (
-    <View 
-      style={{
-        margin: 20,
-        height: 100,
-        borderRadius:8,
-        backgroundColor: 'lavender',
-        padding:12,
-        justifyContent:'center',
-      }}
-    >
-      <Text style={{fontSize: 15, fontWeight: 500}}>{title}</Text>
-      {/* this will only be displayed if showButton is true */}
-      {/* Method 1 */}
-      {showButton && <Button title='Click Me'/>}
-      {/* Method 2 */}
-      {buttonTitle ? <Button title={buttonTitle}/> : null}
-    </View>
-  )
-}
-
-// child component to display message to user
-const UserDisplay = ({loading, error, title}) => {
-  let showContent;
-
-  {/* Method 3 */}
-  if(error) showContent = <Text style={{color:'red'}}>Something went wrong!</Text>
-  else if(loading) showContent = <Text style={{color:'blue'}}>Loading...</Text>
-  else showContent = <Text style={{color:'green'}}>{title}</Text>
-
-  return(
-    <View style={{padding:20}}>
-      <Text>{showContent}</Text>
     </View>
   )
 }
