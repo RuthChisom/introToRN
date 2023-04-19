@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, SafeAreaView, Button , ScrollView, FlatList} from 'react-native';
+import { useState, useEffect ,memo, useCallback} from 'react';
+import { Text, View, Image, TouchableOpacity, SafeAreaView, Button , ScrollView, FlatList, Pressable, Alert} from 'react-native';
 import Section2 from './components/Section2';
 import styles from './styles'
 import FormInput from './components/FormInput';
@@ -18,13 +18,18 @@ const Section = (propss) => {
   )
 }
 
+const Label = ({badge}) => {
+  console.log(`rendered item ${badge}`);
+}
+const LabelMemo = memo(Label); //memo hook caches previous value, no need to rerender so that app won't be slow
+
 // parent component
 export default function App() {
-
   const [name, setName] = useState('Ruth');
   // console.log(name);
   let [age, setAge] = useState('20');
-
+  
+  const [count, setCount] = useState(0);
 
   const accessMyContacts = () => {
     console.log("accessing my contacts");
@@ -36,6 +41,25 @@ export default function App() {
     setAge(++age);
     console.log(age);
   }
+
+  const increment = () => {
+    setCount(count + 1);
+  }
+
+  const decrement = () => {
+    setCount((counter) => counter - 1);
+    // better syntax, so that you can keep this value and use it separately
+  }
+
+  useEffect(() => {
+    Alert.alert("Hello guys");
+  },[count]);
+  // add dependency .e.g. count, so that it only effects at the beggining and when there is a change to count
+
+  const showCount = useCallback(() => {
+    console.log(`Count is ${count}`);
+    Alert.alert(`Count is ${count}`);
+  }, [count]);
 
   return (
     <SafeAreaView>
@@ -81,13 +105,48 @@ export default function App() {
           <FormInput />
 
           <Text style={styles.headerText}> Conditional Rendering</Text>
-          <Card title='Mon 17, April 2023' />
-          <Card title='Tue 18, April 2023' showButton={true} />
-          <Card title='Wed 19, April 2023' showButton={true} buttonTitle='Click me also'/>
+          <Card label='Mon 17, April 2023' />
+          <Card label='Tue 18, April 2023' showButton={true} />
+          <Card label='Wed 19, April 2023' showButton={true} buttonTitle='Click me also'/>
           
           <UserDisplay error={true} />
           <UserDisplay loading={true} title='Data Successfully Loaded' />
           <UserDisplay title='Data Successfully Loaded!!' />
+          
+          <Text style={styles.headerText}> React Hooks</Text>
+          <View style={{margin:15}}>
+            <Text style={{fontSize:30,fontWeight:500,color:'purple'}}>Count: {count}</Text>
+          </View>
+          <View
+            style={{margin:10, flexDirection:'row', justifyContent:'space-between',marginHorizontal:40}}
+          >
+            <Pressable
+              style={{backgroundColor:'red', justifyContent:'center',padding:10}}
+              onPress={decrement}
+            >
+              <Text>Subtract</Text>
+            </Pressable>
+            <Pressable
+              style={{backgroundColor:'green', justifyContent:'center',padding:10}}
+              onPress={increment}
+            >
+              <Text>Add</Text>
+            </Pressable>
+          </View>
+
+          <Button
+            title={`Press me ${count} times`}
+            onPress={() => {
+              setCount(count + 1);
+            }}
+          />
+          <LabelMemo badge='label with memo'/>
+
+<Button
+title='Show Count'
+  onPress={showCount}
+/>
+
         </View>
       </ScrollView>
 
@@ -120,5 +179,3 @@ export default function App() {
     
   );
 }
-
-

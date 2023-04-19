@@ -1,7 +1,7 @@
 import { View, Text, Button } from 'react-native'
 import React from 'react'
 
-const Card = ({title, showButton, buttonTitle}) => {
+const Card = ({label, showButton, buttonTitle}) => {
   return (
     <View 
       style={{
@@ -13,7 +13,7 @@ const Card = ({title, showButton, buttonTitle}) => {
         justifyContent:'center',
       }}
     >
-      <Text style={{fontSize: 15, fontWeight: 500}}>{title}</Text>
+      <Text style={{fontSize: 15, fontWeight: 500}}>{label}</Text>
       {/* this will only be displayed if showButton is true */}
       {/* Method 1 */}
       {showButton && <Button title='Click Me'/>}
