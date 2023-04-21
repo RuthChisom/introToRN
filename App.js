@@ -4,8 +4,6 @@ import { Text, View, Image, TouchableOpacity, SafeAreaView, Button , ScrollView,
 import Section2 from './components/Section2';
 import styles from './styles'
 import FormInput from './components/FormInput';
-import {names} from './externalData';
-import Users from './components/Users';
 import Card from './components/Card';
 import UserDisplay from './components/UserDisplay';
 
@@ -149,31 +147,6 @@ title='Show Count'
 
         </View>
       </ScrollView>
-
-      {/* list */}
-      {/* i had to bring Flatlist outside ScrollView because both have scroll feature, which will clash */}
-      {/* move to a new screen to test */}
-      {/* <View style={styles.head}>
-        <Text style={styles.headerText}>List and Keys</Text>
-      </View> */}
-      {/* <View>
-        <FlatList
-        horizontal
-        data={names}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({item}) => {
-          console.log("names", item);
-          return <Users names={item.name}/>;
-        }}
-        ListHeaderComponent={() => {
-          return(
-            <View style={{margin:10}}>
-            <Text>List of User Names</Text>
-            </View>
-          );
-        }}
-        />
-      </View> */}
     </SafeAreaView>
 
     
